@@ -45,8 +45,11 @@ if [[ $GPG_ENABLED == "true" ]]; then
 else
   echo "GPG signing is not enabled"
 fi
-echo "Override the java home as gitactions is seting up the JAVA_HOME env variable"
-JAVA_HOME="/usr/local/openjdk-11/"
+
+#Setup SSH key
+echo "Add SSH key"
+add-ssh-key.sh 
+
 # Setup maven local repo
 if [[ -n "$MAVEN_LOCAL_REPO_PATH" ]]; then
      MAVEN_REPO_LOCAL="-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
@@ -54,6 +57,6 @@ fi
 
 # Do the release
 echo "Do mvn release:prepare with arguments $MAVEN_ARGS"
-mvn $MAVEN_REPO_LOCAL -Dusername=$GITREPO_ACCESS_TOKEN release:prepare -B -Darguments="$MAVEN_ARGS"
+mvn $MAVEN_REPO_LOCAL release:prepare -B -Darguments="$MAVEN_ARGS"
 echo "Do mvn release:perform with arguments $MAVEN_ARGS"
 mvn $MAVEN_REPO_LOCAL release:perform -B -Darguments="$MAVEN_ARGS"
