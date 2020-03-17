@@ -25,3 +25,6 @@ The script is expecting some environment variables:
 - GIT_RELEASE_BOT_EMAIL: The git user email for commiting the release
 
 - GITREPO_ACCESS_TOKEN: GIT repo access token to push release commits
+
+- CI_COMMIT_SHA: The commit SHA that triggered the workflow.
+- CI_COMMIT_REF_NAME: The branch or tag ref that triggered the workflow.
