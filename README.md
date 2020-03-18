@@ -28,6 +28,3 @@ The script is expecting some environment variables:
 
 - CI_COMMIT_SHA: The commit SHA that triggered the workflow.
 - CI_COMMIT_REF_NAME: The branch or tag ref that triggered the workflow.
-
-- DOCKER_REGISTRY_CREDENTIAL: the docker registry credential in JSON format
-- DOCKER_REGISTRY_URL: the docker registry url
