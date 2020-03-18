@@ -50,6 +50,9 @@ fi
 echo "Add SSH key"
 add-ssh-key.sh 
 
+#Login to docker
+echo  "$DOCKER_REGISTRY_CREDENTIAL" | base64 -d  | docker login -u _json_key --password-stdin $DOCKER_REGISTRY_URL
+
 # Setup maven local repo
 if [[ -n "$MAVEN_LOCAL_REPO_PATH" ]]; then
      MAVEN_REPO_LOCAL="-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
