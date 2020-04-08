@@ -7,5 +7,5 @@ mkdir -p ~/.ssh/
 echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 
-echo "Set StrictHostKeyChecking accept-new"
-echo -e "Host *\n\tStrictHostKeyChecking accept-new\n\n" > ~/.ssh/config
+echo "Set StrictHostKeyChecking no"
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
