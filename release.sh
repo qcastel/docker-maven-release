@@ -52,16 +52,16 @@ add-ssh-key.sh
 
 # Setup maven local repo
 if [[ -n "$MAVEN_LOCAL_REPO_PATH" ]]; then
-     MAVEN_REPO_LOCAL="-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
+     MAVEN_REPO_LOCAL="$-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
 fi
 
 # Setup next version
 if [[ -n "$VERSION_MINOR" ]]; then
-     RELEASE_PREPARE_OPTS="-DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
+     RELEASE_PREPARE_OPTS="$RELEASE_PREPARE_OPTS -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
 fi
 
 if [[ -n "$VERSION_MAJOR" ]]; then
-     RELEASE_PREPARE_OPTS="-DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
+     RELEASE_PREPARE_OPTS="$RELEASE_PREPARE_OPTS -DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
 fi
 
 # Do the release
