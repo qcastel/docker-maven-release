@@ -55,8 +55,17 @@ if [[ -n "$MAVEN_LOCAL_REPO_PATH" ]]; then
      MAVEN_REPO_LOCAL="-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
 fi
 
+# Setup next version
+if [[ -n "$VERSION_MINOR" ]]; then
+     RELEASE_PREPARE_OPTS="-DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
+fi
+
+if [[ -n "$VERSION_MAJOR" ]]; then
+     RELEASE_PREPARE_OPTS="-DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
+fi
+
 # Do the release
-echo "Do mvn release:prepare with arguments $MAVEN_ARGS"
-mvn $MAVEN_REPO_LOCAL release:prepare -B -Darguments="$MAVEN_ARGS"
-echo "Do mvn release:perform with arguments $MAVEN_ARGS"
-mvn $MAVEN_REPO_LOCAL release:perform -B -Darguments="$MAVEN_ARGS"
+echo "Do mvn release:prepare with options $RELEASE_PREPARE_OPTS and arguments $MAVEN_ARGS"
+mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS release:prepare -B -Darguments="$MAVEN_ARGS"
+echo "Do mvn release:perform with options $RELEASE_PREPARE_OPTS and arguments $MAVEN_ARGS"
+mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS release:perform -B -Darguments="$MAVEN_ARGS"
