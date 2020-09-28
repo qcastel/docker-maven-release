@@ -66,6 +66,6 @@ fi
 
 # Do the release
 echo "Do mvn release:prepare with options $RELEASE_PREPARE_OPTS and arguments $MAVEN_ARGS"
-mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS release:prepare -B -Darguments="$MAVEN_ARGS"
+mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS build-helper:parse-version release:prepare -B -Darguments="$MAVEN_ARGS"
 echo "Do mvn release:perform with options $RELEASE_PREPARE_OPTS and arguments $MAVEN_ARGS"
-mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS release:perform -B -Darguments="$MAVEN_ARGS"
+mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS build-helper:parse-version release:perform -B -Darguments="$MAVEN_ARGS"
