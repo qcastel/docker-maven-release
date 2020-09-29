@@ -55,6 +55,16 @@ if [[ -n "$MAVEN_LOCAL_REPO_PATH" ]]; then
      MAVEN_REPO_LOCAL="$-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
 fi
 
+APP_VERSION=`xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml`
+#verify we are not on a release tag
+if [[ "$APP_VERSION" == *0 ]]; then 
+     echo "Release is not a snapshot, move to next patch version and to snapshot"
+     mvn  build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT
+     git commit -am "Prepare version for next release"
+     git push origin $BRANCH_TO_COMMIT
+fi
+
+
 # Setup next version
 if [[ -n "$VERSION_MINOR" ]]; then
      RELEASE_PREPARE_OPTS="$RELEASE_PREPARE_OPTS -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
