@@ -61,7 +61,6 @@ if [[ "$APP_VERSION" == *0 ]]; then
      echo "Release is not a snapshot, move to next patch version and to snapshot"
      mvn  build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT
      git commit -am "Prepare version for next release"
-     git push origin $BRANCH_TO_COMMIT
 fi
 
 
