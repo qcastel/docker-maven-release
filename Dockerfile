@@ -6,4 +6,4 @@ RUN apk --no-cache add openjdk11 --repository=http://dl-cdn.alpinelinux.org/alpi
 COPY ./add-ssh-key.sh /usr/local/bin
 COPY ./release.sh /usr/local/bin
 COPY ./settings.xml /usr/share/maven/conf
-COPY ./simplelogger.properties /usr/share/maven/conf/logging/simplelogger.properties
+COPY ./simplelogger.properties /usr/share/java/maven-3/conf/logging/simplelogger.properties
