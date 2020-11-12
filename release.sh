@@ -98,8 +98,9 @@ elif [[ "$VERSION_MAJOR" == "true" ]]; then
      MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
 fi
 
-if [[ -n "$GITHUB_ACCESS_TOKEN" ]]; then
-     MAVEN_OPTION="$MAVEN_OPTION -Dusername=$GITHUB_ACCESS_TOKEN"
+if [[ -n "$GITREPO_ACCESS_TOKEN" && -n "$SSH_PRIVATE_KEY" ]]; then
+    echo "Git repo access token defined and no SSH setup. We then use the git repo access token via maven release to commit in the repo."
+    MAVEN_OPTION="$MAVEN_OPTION -Dusername=$GITREPO_ACCESS_TOKEN"
 fi
 
 # Do the release
