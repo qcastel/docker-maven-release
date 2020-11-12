@@ -30,11 +30,14 @@ The script is expecting some environment variables:
 - MAVEN_REPO_SERVER_ID: Maven server repository id to push the artefacts to
 - MAVEN_REPO_SERVER_USERNAME: Maven server repository username
 - MAVEN_REPO_SERVER_PASSWORD: Maven server repository password
+- MAVEN_PROJECT_FOLDER: the folder on which to execute maven
 - MAVEN_ARGS: The maven arguments for the release
 - MAVEN_OPTION: the maven options for the release
 
 - GIT_RELEASE_BOT_NAME: The git user name for commiting the release
 - GIT_RELEASE_BOT_EMAIL: The git user email for commiting the release
+
+- SKIP_PERFORM: "false" to skip the maven perform
 
 - GITREPO_ACCESS_TOKEN: GIT repo access token to push release commits
 

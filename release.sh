@@ -49,7 +49,7 @@ fi
 #Setup SSH key
 if [[ -n "$SSH_PRIVATE_KEY" ]]; then
   echo "Add SSH key"
-  add-ssh-key.sh 
+  add-ssh-key.sh
 else
   echo "No SSH key defined"
 fi
