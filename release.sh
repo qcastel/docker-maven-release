@@ -47,13 +47,24 @@ else
 fi
 
 #Setup SSH key
-echo "Add SSH key"
-add-ssh-key.sh 
+if [[ -n "$SSH_PRIVATE_KEY" ]]; then
+  echo "Add SSH key"
+  add-ssh-key.sh 
+else
+  echo "No SSH key defined"
+fi
+
 
 # Setup maven local repo
 if [[ -n "$MAVEN_LOCAL_REPO_PATH" ]]; then
-     MAVEN_REPO_LOCAL="$-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
+     MAVEN_REPO_LOCAL="-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
 fi
+
+if [[ -n "$MAVEN_PROJECT_FOLDER" ]]; then
+  echo "Move to folder $MAVEN_PROJECT_FOLDER"
+  cd $MAVEN_PROJECT_FOLDER
+fi
+
 
 APP_VERSION=`xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml`
 #verify we are not on a release tag
@@ -65,16 +76,31 @@ fi
 
 
 # Setup next version
-if [[ -n "$VERSION_MINOR" ]]; then
-     RELEASE_PREPARE_OPTS="$RELEASE_PREPARE_OPTS -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
+if [[ "$VERSION_MINOR" == "true" ]]; then
+     MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
+elif [[ "$VERSION_MAJOR" == "true" ]]; then
+     MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
 fi
 
-if [[ -n "$VERSION_MAJOR" ]]; then
-     RELEASE_PREPARE_OPTS="$RELEASE_PREPARE_OPTS -DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
+if [[ -n "$GITHUB_ACCESS_TOKEN" ]]; then
+     MAVEN_OPTION="$MAVEN_OPTION -Dusername=$GITHUB_ACCESS_TOKEN"
 fi
 
 # Do the release
-echo "Do mvn release:prepare with options $RELEASE_PREPARE_OPTS and arguments $MAVEN_ARGS"
-mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS build-helper:parse-version release:prepare -B -Darguments="$MAVEN_ARGS"
-echo "Do mvn release:perform with options $RELEASE_PREPARE_OPTS and arguments $MAVEN_ARGS"
-mvn $MAVEN_REPO_LOCAL $RELEASE_PREPARE_OPTS build-helper:parse-version release:perform -B -Darguments="$MAVEN_ARGS"
+echo "Do mvn release:prepare with options $MAVEN_OPTION and arguments $MAVEN_ARGS"
+mvn $MAVEN_OPTION $MAVEN_REPO_LOCAL build-helper:parse-version release:prepare -B -Darguments="$MAVEN_ARGS"
+
+
+# do release if prepare did not fail
+if [[ ("$?" -eq 0) && ($SKIP_PERFORM == "false") ]]; then
+  echo "Do mvn release:perform with options $MAVEN_OPTION and arguments $MAVEN_ARGS"
+  mvn $MAVEN_OPTION $MAVEN_REPO_LOCAL build-helper:parse-version release:perform -B -Darguments="$MAVEN_ARGS"
+fi
+
+# rollback release if prepare or perform failed
+if [[ "$?" -ne 0 ]] ; then
+  echo "Rolling back release after failure"
+  mvn $MAVEN_OPTION $MAVEN_REPO_LOCAL release:rollback -B -Darguments="$MAVEN_ARGS"
+
+  mvn $MAVEN_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN release:rollback -B -Darguments="$MAVEN_ARGS"
+fi
