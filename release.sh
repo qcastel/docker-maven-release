@@ -10,12 +10,17 @@ if [[ "${last_release_commit_hash}" = "${CI_COMMIT_SHA}" ]]; then
      exit 0
 fi
 
+
 # Filter the branch to execute the release on
 readonly local branch=${CI_COMMIT_REF_NAME##*/}
 echo "Current branch: ${branch}"
 if [[ -n "$RELEASE_BRANCH_NAME" && ! "${branch}" = "$RELEASE_BRANCH_NAME" ]]; then
      echo "Skipping for ${branch} branch"
      exit 0
+fi
+
+if [[ -z "${SSH_ROOT_FOLDER}" ]]; then
+  SSH_ROOT_FOLDER=~/.ssh
 fi
 
 # Making sure we are on top of the branch
@@ -101,6 +106,4 @@ fi
 if [[ "$?" -ne 0 ]] ; then
   echo "Rolling back release after failure"
   mvn $MAVEN_OPTION $MAVEN_REPO_LOCAL release:rollback -B -Darguments="$MAVEN_ARGS"
-
-  mvn $MAVEN_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN release:rollback -B -Darguments="$MAVEN_ARGS"
 fi

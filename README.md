@@ -25,6 +25,7 @@ The script is expecting some environment variables:
 - GPG_KEY: GPG private key base64 encoded.
 
 - SSH_PRIVATE_KEY: SSH private key base64 encoded.
+- SSH_ROOT_FOLDER: by default `${SSH_ROOT_FOLDER}`
 
 - MAVEN_LOCAL_REPO_PATH: The maven local repository path
 - MAVEN_REPO_SERVER_ID: Maven server repository id to push the artefacts to
