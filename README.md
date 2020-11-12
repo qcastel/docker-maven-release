@@ -28,7 +28,6 @@ The script is expecting some environment variables:
 - SSH_ROOT_FOLDER: by default `${SSH_ROOT_FOLDER}`
 - SSH_EXTRA_KNOWN_HOST: Add an extra hostname you need to get added to .ssh/known_hosts
 
-- MAVEN_LOCAL_REPO_PATH: The maven local repository path
 - MAVEN_REPO_SERVER_ID: Maven server repository id to push the artefacts to
 - MAVEN_REPO_SERVER_USERNAME: Maven server repository username
 - MAVEN_REPO_SERVER_PASSWORD: Maven server repository password

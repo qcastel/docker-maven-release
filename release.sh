@@ -20,6 +20,7 @@ if [[ -n "$RELEASE_BRANCH_NAME" && ! "${branch}" = "$RELEASE_BRANCH_NAME" ]]; th
      exit 0
 fi
 
+#Configure the default env variables
 if [[ !  -z "${SSH_ROOT_FOLDER}" ]]; then
   SSH_ROOT_FOLDER=~/.ssh
 fi
@@ -70,8 +71,7 @@ else
   echo "No SSH key defined"
 fi
 
-
-
+# Change the current folder to point to the maven project folder
 if [[ -n "$MAVEN_PROJECT_FOLDER" ]]; then
   echo "Move to folder $MAVEN_PROJECT_FOLDER"
   cd $MAVEN_PROJECT_FOLDER

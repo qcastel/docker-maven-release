@@ -11,10 +11,12 @@ chmod 600 ${SSH_ROOT_FOLDER}/id_rsa
 echo "Set StrictHostKeyChecking no"
 echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ${SSH_ROOT_FOLDER}/config
 
+#Whitelist some well-known git repositories management
 ssh-keyscan -t rsa github.com >> ${SSH_ROOT_FOLDER}/known_hosts
 ssh-keyscan -t rsa gitlab.com >> ${SSH_ROOT_FOLDER}/known_hosts
 ssh-keyscan -t rsa bitbucket.org >> ${SSH_ROOT_FOLDER}/known_hosts
 
+# Add an extra one on demand
 if [[ ! -z "${SSH_EXTRA_KNOWN_HOST}" ]]; then
   echo "Whitelist  ${SSH_EXTRA_KNOWN_HOST} in ${SSH_ROOT_FOLDER}/known_hosts"
   ssh-keyscan -t rsa ${SSH_EXTRA_KNOWN_HOST} >> ${SSH_ROOT_FOLDER}/known_hosts
