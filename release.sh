@@ -30,8 +30,9 @@ if [[ !  -z "${M2_HOME_FOLDER}" ]]; then
 fi
 echo "Using M2 repository folder ${M2_HOME_FOLDER}"
 
-find $M2_HOME_FOLDER -maxdepth 0 -empty -exec echo "{} is empty, this means we didn't hit a potential M2 cache :(" \;
-
+if [ -z "$(ls -A ${M2_HOME_FOLDER})" ]; then
+  echo "${M2_HOME_FOLDER} is empty, this means we didn't hit a potential M2 cache :("
+fi
 
 # Making sure we are on top of the branch
 echo "Git checkout branch ${CI_COMMIT_REF_NAME##*/}"
