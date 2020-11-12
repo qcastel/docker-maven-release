@@ -71,10 +71,6 @@ else
 fi
 
 
-# Setup maven local repo
-if [[ -n "$MAVEN_LOCAL_REPO_PATH" ]]; then
-     MAVEN_REPO_LOCAL="-Dmaven.repo.local=$MAVEN_LOCAL_REPO_PATH"
-fi
 
 if [[ -n "$MAVEN_PROJECT_FOLDER" ]]; then
   echo "Move to folder $MAVEN_PROJECT_FOLDER"
