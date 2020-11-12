@@ -19,7 +19,7 @@ if [[ -n "$RELEASE_BRANCH_NAME" && ! "${branch}" = "$RELEASE_BRANCH_NAME" ]]; th
      exit 0
 fi
 
-if [[ -z "${SSH_ROOT_FOLDER}" ]]; then
+if [[ !  -z "${SSH_ROOT_FOLDER}" ]]; then
   SSH_ROOT_FOLDER=~/.ssh
 fi
 echo "Using SSH folder ${SSH_ROOT_FOLDER}"
