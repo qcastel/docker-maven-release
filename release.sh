@@ -22,6 +22,7 @@ fi
 if [[ -z "${SSH_ROOT_FOLDER}" ]]; then
   SSH_ROOT_FOLDER=~/.ssh
 fi
+echo "Using SSH folder ${SSH_ROOT_FOLDER}"
 
 # Making sure we are on top of the branch
 echo "Git checkout branch ${CI_COMMIT_REF_NAME##*/}"
