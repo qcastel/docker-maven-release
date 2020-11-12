@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+
 # avoid the release loop by checking if the latest commit is a release commit
 readonly local last_release_commit_hash=$(git log --author="$GIT_RELEASE_BOT_NAME" --pretty=format:"%H" -1)
 echo "Last $GIT_RELEASE_BOT_NAME commit: ${last_release_commit_hash}"
@@ -23,6 +24,12 @@ if [[ !  -z "${SSH_ROOT_FOLDER}" ]]; then
   SSH_ROOT_FOLDER=~/.ssh
 fi
 echo "Using SSH folder ${SSH_ROOT_FOLDER}"
+
+if [[ !  -z "${M2_HOME_FOLDER}" ]]; then
+  M2_HOME_FOLDER=/root/.m2
+fi
+echo "Using M2 repository folder ${M2_HOME_FOLDER}"
+
 
 # Making sure we are on top of the branch
 echo "Git checkout branch ${CI_COMMIT_REF_NAME##*/}"
