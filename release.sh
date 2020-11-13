@@ -21,12 +21,12 @@ if [[ -n "$RELEASE_BRANCH_NAME" && ! "${branch}" = "$RELEASE_BRANCH_NAME" ]]; th
 fi
 
 #Configure the default env variables
-if [[ !  -z "${SSH_ROOT_FOLDER}" ]]; then
+if [[ -z "${SSH_ROOT_FOLDER}" ]]; then
   SSH_ROOT_FOLDER=~/.ssh
 fi
 echo "Using SSH folder ${SSH_ROOT_FOLDER}"
 
-if [[ !  -z "${M2_HOME_FOLDER}" ]]; then
+if [[ -z "${M2_HOME_FOLDER}" ]]; then
   M2_HOME_FOLDER=/root/.m2
 fi
 echo "Using M2 repository folder ${M2_HOME_FOLDER}"
