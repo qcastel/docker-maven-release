@@ -35,6 +35,11 @@ if [ -z "$(ls -A ${M2_HOME_FOLDER})" ]; then
   echo "${M2_HOME_FOLDER} is empty, this means we didn't hit a potential M2 cache :("
 fi
 
+if [[ -z "${GPG_ENABLED}" ]]; then
+  echo "No GPG_ENABLED env setup -> GPG is disabled by default."
+  export GPG_ENABLED=false
+fi
+
 # Making sure we are on top of the branch
 echo "Git checkout branch ${CI_COMMIT_REF_NAME##*/}"
 git checkout ${CI_COMMIT_REF_NAME##*/}
@@ -57,8 +62,10 @@ if [[ $GPG_ENABLED == "true" ]]; then
      echo "GPG_KEY_ID = $GPG_KEY_ID"
      echo "Import the GPG key"
      echo  "$GPG_KEY" | base64 -d > private.key
-     gpg --import ./private.key
+     gpg --batch --import ./private.key
      rm ./private.key
+     echo "List of keys:"
+     gpg --list-secret-keys --keyid-format LONG
 else
   echo "GPG signing is not enabled"
 fi

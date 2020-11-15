@@ -10,6 +10,25 @@
             <username>${env.MAVEN_REPO_SERVER_USERNAME}</username>
             <!-- Credential stored in Travis CI -->
             <password>${env.MAVEN_REPO_SERVER_PASSWORD}</password>
+            <privateKey>${env.SSH_ROOT_FOLDER}/id_rsa</privateKey>
+            <passphrase>${env.SSH_PASSPHRASE}</passphrase>
         </server>
     </servers>
+
+    <profiles>
+        <!-- GPG settings -->
+        <profile>
+            <id>gpg</id>
+            <activation>
+                <activeByDefault>${env.GPG_ENABLED}</activeByDefault>
+            </activation>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <!-- Load passphrase from env variable -->
+                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+                <gpg.keyname>${env.GPG_KEY_ID}</gpg.keyname>
+
+            </properties>
+        </profile>
+    </profiles>
 </settings>

@@ -23,10 +23,12 @@ The script is expecting some environment variables:
 - GPG_ENABLED: enable GPG signing
 - GPG_KEY_ID: GPG signing KID
 - GPG_KEY: GPG private key base64 encoded.
+- GPG_PASSPHRASE: GPG passphrase
 
 - SSH_PRIVATE_KEY: SSH private key base64 encoded.
 - SSH_ROOT_FOLDER: by default `${SSH_ROOT_FOLDER}`
 - SSH_EXTRA_KNOWN_HOST: Add an extra hostname you need to get added to .ssh/known_hosts
+- SSH_PASSPHRASE: SSH passphrase
 
 - MAVEN_REPO_SERVER_ID: Maven server repository id to push the artefacts to
 - MAVEN_REPO_SERVER_USERNAME: Maven server repository username
@@ -35,8 +37,8 @@ The script is expecting some environment variables:
 - MAVEN_ARGS: The maven arguments for the release
 - MAVEN_OPTION: the maven options for the release
 
-- GIT_RELEASE_BOT_NAME: The git user name for commiting the release
-- GIT_RELEASE_BOT_EMAIL: The git user email for commiting the release
+- GIT_RELEASE_BOT_NAME: The git user name for committing the release
+- GIT_RELEASE_BOT_EMAIL: The git user email for committing the release
 
 - SKIP_PERFORM: "false" to skip the maven perform
 
