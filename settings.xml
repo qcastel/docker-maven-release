@@ -13,6 +13,11 @@
             <privateKey>${env.SSH_ROOT_FOLDER}/id_rsa</privateKey>
             <passphrase>${env.SSH_PASSPHRASE}</passphrase>
         </server>
+        <server>
+            <id>${env.DOCKER_REGISTRY_ID}</id>
+            <username>${env.DOCKER_REGISTRY_USERNAME}</username>
+            <password>${env.DOCKER_REGISTRY_PASSWORD}</password>
+        </server>
     </servers>
 
     <profiles>

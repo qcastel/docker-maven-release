@@ -30,12 +30,16 @@ The script is expecting some environment variables:
 - SSH_EXTRA_KNOWN_HOST: Add an extra hostname you need to get added to .ssh/known_hosts
 - SSH_PASSPHRASE: SSH passphrase
 
-- MAVEN_REPO_SERVER_ID: Maven server repository id to push the artefacts to
+- MAVEN_REPO_SERVER_ID: Maven server repository id to push the artifacts to
 - MAVEN_REPO_SERVER_USERNAME: Maven server repository username
 - MAVEN_REPO_SERVER_PASSWORD: Maven server repository password
 - MAVEN_PROJECT_FOLDER: the folder on which to execute maven
 - MAVEN_ARGS: The maven arguments for the release
 - MAVEN_OPTION: the maven options for the release
+
+- DOCKER_REGISTRY_ID: ID of your registry; ex: `registry.hub.docker.com`
+- DOCKER_REGISTRY_USERNAME: the username for your docker registry
+- DOCKER_REGISTRY_PASSWORD: the password for your docker registry
 
 - GIT_RELEASE_BOT_NAME: The git user name for committing the release
 - GIT_RELEASE_BOT_EMAIL: The git user email for committing the release
