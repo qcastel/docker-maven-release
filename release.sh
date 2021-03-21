@@ -48,7 +48,7 @@ if [[ -z "${GPG_ENABLED}" ]]; then
   export GPG_ENABLED=false
 fi
 
-if [[ -z "${SKIP_GIT_SANITY_CHECK}" ]]; then
+if [[ $SKIP_GIT_SANITY_CHECK == "true" ]]; then
   # Making sure we are on top of the branch
   echo "Git checkout branch ${CI_COMMIT_REF_NAME##*/}"
   git checkout ${CI_COMMIT_REF_NAME##*/}
