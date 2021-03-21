@@ -48,11 +48,15 @@ if [[ -z "${GPG_ENABLED}" ]]; then
   export GPG_ENABLED=false
 fi
 
-# Making sure we are on top of the branch
-echo "Git checkout branch ${CI_COMMIT_REF_NAME##*/}"
-git checkout ${CI_COMMIT_REF_NAME##*/}
-echo "Git reset hard to ${CI_COMMIT_SHA}"
-git reset --hard ${CI_COMMIT_SHA}
+if [[ -z "${SKIP_GIT_SANITY_CHECK}" ]]; then
+  # Making sure we are on top of the branch
+  echo "Git checkout branch ${CI_COMMIT_REF_NAME##*/}"
+  git checkout ${CI_COMMIT_REF_NAME##*/}
+  echo "Git reset hard to ${CI_COMMIT_SHA}"
+  git reset --hard ${CI_COMMIT_SHA}
+else 
+  echo "Skipping git sanity check"
+fi
 
 # This script will do a release of the artifact according to http://maven.apache.org/maven-release/maven-release-plugin/
 echo "Setup git user name to '$GIT_RELEASE_BOT_NAME'"

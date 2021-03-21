@@ -44,7 +44,8 @@ The script is expecting some environment variables:
 - GIT_RELEASE_BOT_NAME: The git user name for committing the release
 - GIT_RELEASE_BOT_EMAIL: The git user email for committing the release
 
-- SKIP_PERFORM: "false" to skip the maven perform
+- SKIP_GIT_SANITY_CHECK: true to skip the git sanity check, basically resetting the branch just in case
+- SKIP_PERFORM: "false" to not skip the maven perform
 
 - GITREPO_ACCESS_TOKEN: GIT repo access token to push release commits
 
