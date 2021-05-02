@@ -36,6 +36,7 @@ The script is expecting some environment variables:
 - MAVEN_PROJECT_FOLDER: the folder on which to execute maven
 - MAVEN_ARGS: The maven arguments for the release
 - MAVEN_OPTION: the maven options for the release
+- MAVEN_DEVELOPMENT_VERSION_NUMBER: development version number
 
 - DOCKER_REGISTRY_ID: ID of your registry; ex: `registry.hub.docker.com`
 - DOCKER_REGISTRY_USERNAME: the username for your docker registry

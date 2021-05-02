@@ -109,10 +109,14 @@ fi
 
 
 # Setup next version
-if [[ "$VERSION_MINOR" == "true" ]]; then
-     MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
-elif [[ "$VERSION_MAJOR" == "true" ]]; then
-     MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
+if [[ -n "$MAVEN_DEVELOPMENT_VERSION_NUMBER" ]]; then
+      MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=${MAVEN_DEVELOPMENT_VERSION_NUMBER}"
+else 
+  if [[ "$VERSION_MINOR" == "true" ]]; then
+      MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
+  elif [[ "$VERSION_MAJOR" == "true" ]]; then
+      MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
+  fi
 fi
 
 if [[ -n "$GITREPO_ACCESS_TOKEN" && -z "${SSH_PRIVATE_KEY}" ]]; then
