@@ -119,12 +119,21 @@ else
   fi
 fi
 
+
+# Setup release version
+if [[ -n "$MAVEN_RELEASE_VERSION_NUMBER" ]]; then
+      MAVEN_OPTION="$MAVEN_OPTION -DreleaseVersion=${MAVEN_RELEASE_VERSION_NUMBER}"
+fi
+
+
+# Set access-token for gitrepo
 if [[ -n "$GITREPO_ACCESS_TOKEN" && -z "${SSH_PRIVATE_KEY}" ]]; then
     echo "Git repo access token defined and no SSH setup. We then use the git repo access token via maven release to commit in the repo."
     MAVEN_OPTION="$MAVEN_OPTION -Dusername=$GITREPO_ACCESS_TOKEN"
 else
   echo "Not using access token authentication, as no access token (via env GITREPO_ACCESS_TOKEN) defined or because an SSH key is defined and setup (via env SSH_PRIVATE_KEY)"
 fi
+
 
 # Do the release
 echo "Do mvn release:prepare with options $MAVEN_OPTION and arguments $MAVEN_ARGS"
