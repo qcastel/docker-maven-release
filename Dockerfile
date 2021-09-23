@@ -5,6 +5,8 @@ RUN apk --no-cache add openjdk11 --repository=http://dl-cdn.alpinelinux.org/alpi
 RUN apk --update add openjdk14-jre --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 RUN apk --update add openjdk15-jre --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 RUN apk --update add openjdk16-jre --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+RUN apk --update add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+
 
 COPY ./add-ssh-key.sh /usr/local/bin
 COPY ./release.sh /usr/local/bin
