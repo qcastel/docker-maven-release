@@ -3,7 +3,6 @@ export MAVEN_REPO_SERVER_ID="TEST1"
 export MAVEN_REPO_SERVER_USERNAME="TEST@@@£"
 export MAVEN_REPO_SERVER_PASSWORD="TESTESTES"
 
-SETTINGS_SERVER_TEMPLATE_FILE="/usr/share/java/maven-3/conf/settings-server-template.xml"
 
 MAVEN_SERVERS_XML='';
 echo "Setup the maven server credentials for the settings.xml"

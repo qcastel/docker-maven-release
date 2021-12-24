@@ -6,6 +6,7 @@ RUN apk --update add openjdk14 --repository=http://dl-cdn.alpinelinux.org/alpine
 RUN apk --update add openjdk15 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 RUN apk --update add openjdk16 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 RUN apk --update add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+RUN apk add bash gettext
 
 COPY ./add-ssh-key.sh /usr/local/bin
 COPY ./setup-maven-servers.sh /usr/local/bin
