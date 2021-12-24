@@ -4,7 +4,12 @@
                           https://maven.apache.org/xsd/settings-1.0.0.xsd">
     <localRepository>${M2_HOME_FOLDER}/repository</localRepository>
     <servers>
-        ${env.MAVEN_SERVERS_XML}
+        <server>
+            <id>${env.DOCKER_REGISTRY_ID}</id>
+            <username>${env.DOCKER_REGISTRY_USERNAME}</username>
+            <password>${env.DOCKER_REGISTRY_PASSWORD}</password>
+        </server>
+${MAVEN_SERVERS_XML}
     </servers>
 
     <profiles>

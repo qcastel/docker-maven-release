@@ -1,9 +1,9 @@
-<server>
-    <!-- This id must match the distributionManagement section in pom.xml -->
-    <id>${MAVEN_REPO_SERVER_ID}</id>
-    <username>${MAVEN_REPO_SERVER_USERNAME}</username>
-    <!-- Credential stored in Travis CI -->
-    <password>${MAVEN_REPO_SERVER_PASSWORD}</password>
-    <privateKey>${MAVEN_REPO_SERVER_PRIVATE_KEY}</privateKey>
-    <passphrase>${MAVEN_REPO_SERVER_PASSPHRASE}</passphrase>
-</server>
+        <server>
+            <!-- This id must match the distributionManagement section in pom.xml -->
+            <id>${MAVEN_REPO_SERVER_ID}</id>
+            <username>${MAVEN_REPO_SERVER_USERNAME}</username>
+            <!-- Credential stored in Travis CI -->
+            <password>${MAVEN_REPO_SERVER_PASSWORD}</password>
+            <privateKey>${MAVEN_REPO_SERVER_PRIVATE_KEY}</privateKey>
+            <passphrase>${MAVEN_REPO_SERVER_PASSPHRASE}</passphrase>
+        </server>

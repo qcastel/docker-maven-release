@@ -1,9 +1,3 @@
-MAVEN_SERVERS='[{"id": "serverId1", "username": "username", "password": "password", "privateKey": "test", "passphrase": "testes"}, {"id": "serverId2", "username": "username2", "password": "password2"}]'
-export MAVEN_REPO_SERVER_ID="TEST1"
-export MAVEN_REPO_SERVER_USERNAME="TEST@@@£"
-export MAVEN_REPO_SERVER_PASSWORD="TESTESTES"
-
-
 MAVEN_SERVERS_XML='';
 echo "Setup the maven server credentials for the settings.xml"
 
@@ -17,7 +11,7 @@ fi
 
 for row in $(echo "${MAVEN_SERVERS}" | jq -r '.[] | @base64'); do
     _jq() {
-     echo ${row} | base64 --decode | jq -r ${1}
+        echo "${row}" | base64 -d | jq -r "${1}"
     }
    export MAVEN_REPO_SERVER_ID=$(_jq '.id')
    export MAVEN_REPO_SERVER_USERNAME=$(_jq '.username')
@@ -33,9 +27,14 @@ for row in $(echo "${MAVEN_SERVERS}" | jq -r '.[] | @base64'); do
         export MAVEN_REPO_SERVER_PASSPHRASE=${SSH_PASSPHRASE}
    fi
    templateReplaced=$(envsubst < $SETTINGS_SERVER_TEMPLATE_FILE);
-   MAVEN_SERVERS_XML="${MAVEN_SERVERS_XML}\n${templateReplaced}"
+   MAVEN_SERVERS_XML="${MAVEN_SERVERS_XML}${templateReplaced}"
 
 done
 
 export MAVEN_SERVERS_XML="$MAVEN_SERVERS_XML"
-echo "The servers section that is going to be replace in the settings.xml:\n $MAVEN_SERVERS_XML"
+
+echo "The following servers section that is going to be replace in the settings.xml:\n $MAVEN_SERVERS_XML"
+
+echo "Replacing maven servers in template ${SETTINGS_SERVER_TEMPLATE_FILE} to ${SETTINGS_TEMPLATE_FILE}"
+envsubst < ${SETTINGS_TEMPLATE_FILE} > ${SETTINGS_FILE}
+cat ${SETTINGS_FILE}
