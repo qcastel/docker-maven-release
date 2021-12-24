@@ -30,9 +30,10 @@ The script is expecting some environment variables:
 - SSH_EXTRA_KNOWN_HOST: Add an extra hostname you need to get added to .ssh/known_hosts
 - SSH_PASSPHRASE: SSH passphrase
 
-- MAVEN_REPO_SERVER_ID: Maven server repository id to push the artifacts to
-- MAVEN_REPO_SERVER_USERNAME: Maven server repository username
-- MAVEN_REPO_SERVER_PASSWORD: Maven server repository password
+- MAVEN_REPO_SERVER_ID: !!DEPRECATED: Use MAVEN_SERVERS instead!! Maven server repository id to push the artifacts to
+- MAVEN_REPO_SERVER_USERNAME: !!DEPRECATED: Use MAVEN_SERVERS instead!! Maven server repository username
+- MAVEN_REPO_SERVER_PASSWORD: !!DEPRECATED: Use MAVEN_SERVERS instead!! Maven server repository password
+- MAVEN_SERVERS: The maven server repositories, in a JSON format. Example: '[{"id": "serverId1", "username": "username", "password": "password1", "privateKey": "privatekey1", "passphrase": "passphrase1"}, {"id": "serverId2", "username": "username2", "password": "password2"}]'
 - MAVEN_PROJECT_FOLDER: the folder on which to execute maven
 - MAVEN_ARGS: The maven arguments for the release
 - MAVEN_OPTION: the maven options for the release

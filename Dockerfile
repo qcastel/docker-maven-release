@@ -8,7 +8,13 @@ RUN apk --update add openjdk16 --repository=http://dl-cdn.alpinelinux.org/alpine
 RUN apk --update add openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 COPY ./add-ssh-key.sh /usr/local/bin
+COPY ./setup-maven-servers.sh /usr/local/bin
 COPY ./release.sh /usr/local/bin
 COPY ./settings.xml /usr/share/java/maven-3/conf/
+COPY ./settings-server-template.xml /usr/share/java/maven-3/conf/
 COPY ./simplelogger.properties /usr/share/java/maven-3/conf/logging/simplelogger.properties
+
+ARG SETTINGS_SERVER_TEMPLATE_FILE="/usr/share/java/maven-3/conf/settings-server-template.xml"
+ENV SETTINGS_SERVER_TEMPLATE_FILE=$SETTINGS_SERVER_TEMPLATE_FILE
+
 RUN mkdir /root/.m2

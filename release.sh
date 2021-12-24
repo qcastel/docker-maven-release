@@ -98,6 +98,8 @@ if [[ -n "$MAVEN_PROJECT_FOLDER" ]]; then
   cd $MAVEN_PROJECT_FOLDER
 fi
 
+# Setup the server credentials in the settings.xml
+setup-maven-servers.sh
 
 APP_VERSION=`xmllint --xpath '/*[local-name()="project"]/*[local-name()="version"]/text()' pom.xml`
 #verify we are not on a release tag
