@@ -112,12 +112,19 @@ fi
 
 # Setup next version
 if [[ -n "$MAVEN_DEVELOPMENT_VERSION_NUMBER" ]]; then
+      echo "Use a custom version number format: ${MAVEN_DEVELOPMENT_VERSION_NUMBER}"
       MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=${MAVEN_DEVELOPMENT_VERSION_NUMBER}"
 else 
-  if [[ "$VERSION_MINOR" == "true" ]]; then
-      MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
-  elif [[ "$VERSION_MAJOR" == "true" ]]; then
+  if [[ "$VERSION_MAJOR" == "true" ]]; then
+      echo "Increase the major version."
       MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT"
+  elif [[ "$VERSION_MINOR" == "true" ]]; then
+      echo "Increase the minor version."
+      MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT"
+  else
+      #by default, we increment the patch version <=> $VERSION_PATCH" == "true"
+      echo "Increase the patch version."
+      MAVEN_OPTION="$MAVEN_OPTION -DdevelopmentVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT"
   fi
 fi
 

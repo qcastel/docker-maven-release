@@ -14,6 +14,9 @@ The docker image pre-setup with git, maven and gpg and a script to trigger a rel
 # Script
 Script name: release.sh
 
+## version number
+
+By default, the patch version number will be increased
 
 ## Environment variables
 
@@ -57,5 +60,6 @@ The script is expecting some environment variables:
 
 - VERSION_MAJOR: "true" to increment the major version
 - VERSION_MINOR: "true" to increment the minor version
+- VERSION_PATCH: "true" to increment the minor version
 
 - RELEASE_BRANCH_NAME: if defined, filter the branches to trigger a release on.
