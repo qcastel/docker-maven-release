@@ -61,6 +61,7 @@ else
 fi
 
 # This script will do a release of the artifact according to http://maven.apache.org/maven-release/maven-release-plugin/
+git config --global --add safe.directory /github/workspace
 echo "Setup git user name to '$GIT_RELEASE_BOT_NAME'"
 git config --global user.name "$GIT_RELEASE_BOT_NAME";
 echo "Setup git user email to '$GIT_RELEASE_BOT_EMAIL'"
