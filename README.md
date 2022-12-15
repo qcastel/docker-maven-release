@@ -30,6 +30,7 @@ The script is expecting some environment variables:
 
 - SSH_PRIVATE_KEY: SSH private key base64 encoded.
 - SSH_ROOT_FOLDER: by default `${SSH_ROOT_FOLDER}`
+- SSH_IGNORE_DEFAULT_HOSTS: Doesn't add github.com, gitlab.com and bitbucket.org to .ssh/known_hosts
 - SSH_EXTRA_KNOWN_HOST: Add an extra hostname you need to get added to .ssh/known_hosts
 - SSH_PASSPHRASE: SSH passphrase
 
