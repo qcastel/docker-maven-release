@@ -8,6 +8,7 @@ RUN apk --update add openjdk21 --repository=http://dl-cdn.alpinelinux.org/alpine
 RUN apk add bash gettext
 # Vaadin needs node
 RUN apk add --update nodejs npm
+RUN apk --no-cache add libc6-compat
 
 COPY ./add-ssh-key.sh /usr/local/bin
 COPY ./setup-maven-servers.sh /usr/local/bin
